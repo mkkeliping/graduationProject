@@ -13,5 +13,25 @@ From _future_ import print_function
 添加第三方库：参考2.3.1
 #### 2.3 Python数据分析工具
 Python本身数据分析功能不强，需要添加第三方数据库增加其功能，本书用到的库有Numpy（提供数组支持，以及相应的高效的处理函数）、Scipy（提供矩阵支持，以及矩阵相关的数据计算模块）、Matsplotlib（强大的可视化模块，做图库）、pandas（强大、灵活的数据分析和探索工具）、Scikit_learn（支持回归、聚集、分类等强大的机器学习库）。StatsModels(统计建模和计量经济学、包括描述统计、统计模型估计和推测)Keras（深度学习库、用于建立深度网络和深度学习模型）Gisim（用于文本主题模型的库、文本挖掘可以用的到）本书会对这些库做一些基本的讲解，如果想要详细了解，去官网找到相关的帮助文档进行深入学习，限于文本篇幅，只介绍了一些库，还有一些库没有介绍，我们可以搜索相关知识进行解决
-#### 2.3.1Numpy
-Python内部虽然有数组，但当数据量较大时用python就比较慢，Numpy处理速度是C语言级别的。因此编程时，尽量使用内置函数进行处理数组以免发生瓶颈。
+#### 2.3.1 Numpy
+Python内部虽然有数组，但当数据量较大时用python就比较慢，Numpy处理速度是C语言级别的。因此编程时，尽量使用内置函数进行处理数组以免发生瓶颈。由于我安装的是anoconda(一个开源的Python发行版本)里面安装了这个包，不用安装，如果小伙伴安装的是Python版本，那么需要安装此包。为了查证电脑是否安装此包，可以利用代码验证。[学习numpy的官方链接](http://www.numpy.org/index.html)[中文简单链接](http://reverland.org/python/2012/08/22/numpy/)
+```py
+import numpy as np    #导入numpy并且一般命名为np
+a=np.array([2,0,1,5]) #定义数组
+print(a)              #输出数组
+print(a[:3])          #输出数组前三个值
+print(min(a))         #输出数组最小值
+```    
+#### 2.3.2 Scipe
+Numpy是在数组上有matlab的影子，scipe就可以说是半个matlab。因为numpy主要提供多维数组、一般数组，不是矩阵。scipe提供了真正的矩阵，并且提供了大量的基于矩阵的对象与函数。<br>
+scipe包含的功能有最优化、线性代数、积分、插值、拟合、特殊函数、快速傅里叶变换、信号处理与图像处理、常积分方程求解以及其他科学与工程中常用的计算，显然，这些是为挖掘与建模必备的。 <br>
+Scipe依赖于Numpy,因此需要安装完numpy后安装Scipe,利用代码试用是否安装成功，学习参考文档[学习scipy的官方链接](http://www.scipy.org/index.html)[中文简单链接](http://reverland.org/python/2012/08/24/scipy/)
+```py
+from scipy.optimize import fsolve #导入求解方程组的函数
+def f(x):#定义求解方程组
+    x1=x[0]
+    x2=x[1]
+    return [2*x1-x2**2-1,x1**2-x2-2]
+result=fsolve(f,[1,1])#输入初值并求解
+print(result)#结果为[ 1.91963957  1.68501606]正确
+```
