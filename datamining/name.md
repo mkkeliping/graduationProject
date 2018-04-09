@@ -1,11 +1,11 @@
 ## 统计点击次数总代码
+注意：当进行分组统计后想要展示出来，记得把分组统计赋值给一个变量，然后在输出来，这样即可展示
 ```.py
 #coding=utf-8
 import pandas as pd#pandas是强大的数据科学库
 from sqlalchemy import create_engine#编程都需要ORM ，这个是python用的最广泛的数据连接方式
-engine = create_engine('mysql+pymysql://root:mysql@127.0.0.1:3307/shuju?charset=utf8')#地址mysql+pymysql表示MySQL和python连接
-sql = pd.read_sql('all_gzdata', engine, chunksize = 10000)#读取数据，pd.read_sql（表名，地址，每次读取的数据值）这个表示读取数据库
-#统计点击次数
+engine = create_engine('mysql+pymysql://root:mysql@127.0.0.1:3307/shuju?charset=utf8')
+sql = pd.read_sql('all_gzdata', engine, chunksize = 10000)
 c=[i['realIP'].value_counts()for i in sql]#分块统计各个IP出现的次数
 count3=pd.concat(c).groupby(level=0).sum()#合并统计结果，level=0表示按index进行分组
 count3=pd.DataFrame(count3)#把series转化为DataFrame
@@ -19,9 +19,8 @@ count4=count3.groupby('num').sum()#统计不同点击次数分别出现的次数
 ```.py
 import pandas as pd#pandas是强大的数据科学库
 from sqlalchemy import create_engine#编程都需要ORM ，这个是python用的最广泛的数据连接方式
-engine = create_engine('mysql+pymysql://root:mysql@127.0.0.1:3307/shuju?charset=utf8')#地址mysql+pymysql表示MySQL和python连接
-sql = pd.read_sql('all_gzdata', engine, chunksize = 10000)#读取数据，pd.read_sql（表名，地址，每次读取的数据值）这个表示读取数据库
-#统计点击次数
+engine = create_engine('mysql+pymysql://root:mysql@127.0.0.1:3307/shuju?charset=utf8')
+sql = pd.read_sql('all_gzdata', engine, chunksize = 10000)
 ```
 ## 分块统计出现的次数
 这块适合从数据库中读取数据时分块进行统计**某一属性的个数**，并作出最后合并用的。这里注意一下groupby函数，按照其后面的进行分组与数据库的groupby相
