@@ -1,14 +1,11 @@
 ## 数据预处理
 数据处理方式有：数据清洗、数据集成、数据变换。                      
 
-![数据预处理总展示图](https://github.com/mkkeliping/graduationProject/blob/master/picture/dataproprocess01.png)                      
+![数据预处理总展示图](https://github.com/mkkeliping/graduationProject/blob/master/picture/dataproprocess02.png)                      
 
 ### 数据清洗。
 通过上次对数据的分析可以知道，里面存在大量的不需要的数据需要进行清洗。其中包括用户浏览信息路径的，这些数据不但没有作用，反而会影响推荐结果，
 因此需要进一步进行筛选。                               
-
-![图片展示](https://github.com/mkkeliping/graduationProject/blob/master/picture/dataproprocess02.png)                    
-
 代码实现：
 ```.py
 #coding=utf-8
@@ -48,6 +45,7 @@ for i in sql: #逐块变换并去重
   d.to_sql('changed_gzdata', engine, index = False, if_exists = 'append') #保存
 ```
 #### 归类操作
+![数据预处理总展示图](https://github.com/mkkeliping/graduationProject/blob/master/picture/dataproprocess01.png)    
 这里对于倒数第二行有个错误，没有改正出来
 ```.py
 import pandas as pd#pandas是强大的数据科学库
